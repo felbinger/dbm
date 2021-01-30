@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  ldap:
+    image: howardlau1999/openldap-bcrypt
+    container_name: main_ldap_1
+    environment:
+      - "LDAP_DOMAIN=domain.de"
+      - "LDAP_ADMIN_PASSWORD=S3cr3T"
+
+  mariadb:
+    image: mariadb
+    container_name: main_mariadb_1
+    environment:
+      - "MYSQL_ROOT_PASSWORD=S3cr3T"
+      - "MYSQL_USER=backup"
+      - "MYSQL_PASSWORD=S3cr3T"
+      - "MYSQL_DATABASE=mariadb_backup"
+
+  postgres:
+    image: postgres
+    container_name: main_postgres_1
+    environment:
+      - "POSTGRES_PASSWORD=S3cr3T"
+      - "POSTGRES_DB=postgres_backup"
+
+  mongodb:
+    image: mongo
+    container_name: main_mongodb_1
+    environment:
+      - "MONGO_INITDB_ROOT_USERNAME=backup"
+      - "MONGO_INITDB_ROOT_PASSWORD=S3cr3T"
