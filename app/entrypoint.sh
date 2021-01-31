@@ -106,7 +106,8 @@ if [ -n "${POSTGRES_HOST}" ]; then
           --host "${POSTGRES_HOST}" \
           --port="${POSTGRES_PORT}" \
           --username="${POSTGRES_USERNAME}" \
-          "${database_name}" > "/data/${DATE}/${POSTGRES_HOST}/${database_name}.sql"
+          "${database_name}" \
+          --file="/data/${DATE}/${POSTGRES_HOST}/${database_name}.sql"
       fi
     done
   else
