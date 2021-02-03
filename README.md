@@ -33,6 +33,12 @@ docker run --rm -it \
   ghcr.io/felbinger/dbm
 ```
 
+If you'd like to execute the backup using a cronjob, you need to to remove the parameter `-it` from the command.
+```
+# run database backup every three hours
+0 */3 * * * /bin/bash /root/db_backup.sh >/dev/null 2>&1
+```
+
 ## Environment Variables
 |      Variable Name     |                    Description                   | Default Value |
 |------------------------|--------------------------------------------------|---------------|
