@@ -14,7 +14,7 @@ ENV LDAP_PORT=389 \
 
 
 RUN apk add --update --no-cache tzdata openldap-clients mariadb-client \
-  postgresql-client=13.1-r2 mongodb-tools
+  postgresql-client mongodb-tools
 
 # add alpine v3.9 repositories for mongo binary from mongodb package and install packages
 RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.9/main' >> /etc/apk/repositories \
