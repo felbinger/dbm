@@ -18,6 +18,7 @@ if [ -n "${LDAP_HOST}" ]; then
   # check if the required arguments are provided
   if [ -n "${LDAP_BASE_DN}" ] && [ -n "${LDAP_BIND_DN}" ] && [ -n "${LDAP_BIND_PW}" ]; then
     # export
+    # shellcheck disable=SC2153
     ldapsearch -x \
       -H "ldap://${LDAP_HOST}:${LDAP_PORT}" \
       -b "${LDAP_BASE_DN}" \
@@ -36,7 +37,7 @@ if [ -n "${LDAP_HOST}" ]; then
   fi
 fi
 
-if [ -n "${MARIADB_HOST}" ]; then
+if [ -n "${MARIADB_HOST}" ] && [ -n "${MARIADB_PORT}" ]; then
   echo "Starting MariaDB (${MARIADB_HOST}) Backup"
   mkdir -p "/data/${DATE}/${MARIADB_HOST}/"
 
@@ -77,7 +78,7 @@ if [ -n "${MARIADB_HOST}" ]; then
   fi
 fi
 
-if [ -n "${POSTGRES_HOST}" ]; then
+if [ -n "${POSTGRES_HOST}" ] && [ -n "${POSTGRES_PORT}" ]; then
   echo "Starting PostgreSQL (${POSTGRES_HOST}) Backup"
   mkdir -p "/data/${DATE}/${POSTGRES_HOST}/"
 
@@ -120,7 +121,7 @@ if [ -n "${POSTGRES_HOST}" ]; then
   fi
 fi
 
-if [ -n "${MONGODB_HOST}" ]; then
+if [ -n "${MONGODB_HOST}" ] && [ -n "${MONGODB_PORT}" ]; then
   echo "Starting MongoDB (${MONGODB_HOST}) Backup"
   mkdir -p "/data/${DATE}/${MONGODB_HOST}/"
 
