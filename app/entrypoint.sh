@@ -55,8 +55,7 @@ if [ -n "${MARIADB_HOST}" ] && [ -n "${MARIADB_PORT}" ]; then
         --password="${MARIADB_PASSWORD}" \
         -qfsBe "${query}" 2>&1)
       if [ -z "$(echo "${result}" | tail -n +1)" ]; then
-        # shellcheck disable=SC2039
-        echo -e "\e[33mWarning: MariaDB database ${database_name} does not exist!\e[0m"
+        printf "\e[33mWarning: MariaDB database %s does not exist\!\e[0m\n" "${database_name}"
       else
         # backup database
         mysqldump \
@@ -99,8 +98,7 @@ if [ -n "${POSTGRES_HOST}" ] && [ -n "${POSTGRES_PORT}" ]; then
 
       # shellcheck disable=SC2181
       if [ ${?} -ne 0 ]; then
-        # shellcheck disable=SC2039
-        echo -e "\e[33mWarning: PostgreSQL database ${database_name} does not exist!\e[0m"
+        printf "\e[33mWarning: PostgreSQL database %s does not exist!\e[0m\n" "${database_name}"
       else
         # backup database
         pg_dump \
@@ -136,8 +134,7 @@ if [ -n "${MONGODB_HOST}" ] && [ -n "${MONGODB_PORT}" ]; then
         --password="${MONGODB_PASSWORD}" \
         --eval "db.getMongo().getDBNames().indexOf(\"${database_name}\")")
       if [ "${check}" -lt 0 ]; then
-        # shellcheck disable=SC2039
-        echo -e "\e[33mWarning: MongoDB database ${database_name} does not exist!\e[0m"
+        printf "\e[33mWarning: MongoDB database %s does not exist!\e[0m\n" "${database_name}"
       else
         mongodump --quiet \
           --host="${MONGODB_HOST}" \
