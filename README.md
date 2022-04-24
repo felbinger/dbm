@@ -5,7 +5,7 @@ The Docker Backup Manager (DBM) is a docker image to back up the database and ld
 ## Packages
 * mariadb-client (`mysql` and `mysqldump`)
 * postgresql-client (`psql` and `pg_dump`)
-* mongodb (`mongodb`, from alpine v3.9)
+* mongodb (`mongo`)
 * mongodb-tools (`mongodump`)
 * openldap-clients (`ldapsearch`)
 
@@ -13,28 +13,14 @@ The Docker Backup Manager (DBM) is a docker image to back up the database and ld
 This repository contains a [`docker-compose.yml`](./docker-compose.yml), which can be used to test the image.
 ```shell
 docker run --rm -it \
-  -v '/var/backups/:/data/' \
-  -e "LDAP_HOST=main_ldap_1" \
-  -e "LDAP_BASE_DN=dc=domain,dc=de" \
-  -e "LDAP_BIND_DN=cn=admin,dc=domain,dc=de" \
-  -e "LDAP_BIND_PW=S3cr3T" \
-  -e "MARIADB_HOST=main_mariadb_1" \
-  -e "MARIADB_DATABASES=mysql mariadb_backup nonexistent" \
-  -e "MARIADB_PASSWORD=S3cr3T" \
-  -e "MARIADB_USERNAME=root" \
-  -e "POSTGRES_HOST=main_postgres_1" \
-  -e "POSTGRES_USERNAME=postgres" \
-  -e "POSTGRES_PASSWORD=S3cr3T" \
-  -e "POSTGRES_DATABASES=postgres_backup postgres nonexistent" \
-  -e "MONGODB_HOST=main_mongo_1" \
-  -e "MONGODB_PASSWORD=S3cr3T" \
-  -e "MONGODB_DATABASES=admin nonexistent" \
+  -v "/var/backups/:/data/" \
+  --env-file .dbm.env \
   --network=dbm_default \
   ghcr.io/felbinger/dbm
 ```
 
 If you'd like to execute the backup using a cronjob, you need to to remove the parameter `-it` from the command.
-```
+```shell
 # run database backup every three hours
 0 */3 * * * /bin/bash /root/db_backup.sh >/dev/null 2>&1
 ```

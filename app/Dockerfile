@@ -12,14 +12,8 @@ ENV LDAP_PORT=389 \
     MONGODB_AUTH_MECHANISM='SCRAM-SHA-1' \
     TZ='Europe/Berlin'
 
-
-RUN apk add --update --no-cache tzdata openldap-clients mariadb-client \
-  postgresql-client mongodb-tools
-
-# add alpine v3.9 repositories for mongo binary from mongodb package and install packages
-RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.9/main' >> /etc/apk/repositories \
- && echo 'http://dl-cdn.alpinelinux.org/alpine/v3.9/community' >> /etc/apk/repositories \
- && apk add --update --no-cache mongodb
+RUN apk add --update --no-cache tzdata openldap-clients \
+  mariadb-client postgresql-client mongodb mongodb-tools
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
