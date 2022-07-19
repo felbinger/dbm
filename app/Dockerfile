@@ -1,4 +1,4 @@
-FROM alpine:3.15
+FROM alpine:3.16.1
 
 ENV LDAP_PORT=389 \
     LDAP_SCHEMA='ldap' \
