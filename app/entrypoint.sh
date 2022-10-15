@@ -10,6 +10,7 @@ then
 fi
 
 DATE=""
+# shellcheck disable=SC3014
 if [ "${DATE_FORMAT}" == "long" ]; then
   DATE=$(date +"%Y-%m-%d_")
 fi
