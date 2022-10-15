@@ -10,7 +10,7 @@ ENV LDAP_PORT=389 \
     MONGODB_USERNAME='backup' \
     MONGODB_AUTH_DB='admin' \
     MONGODB_AUTH_MECHANISM='SCRAM-SHA-1' \
-    TZ='Europe/Berlin'
+    TZ='Europe/Berlin' \
     DATE_FORMAT=long
 
 RUN apk add --update --no-cache tzdata openldap-clients \
