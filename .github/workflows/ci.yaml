@@ -87,4 +87,4 @@ jobs:
       - name: Check manifest
         if: ${{ github.event_name != 'pull_request' }}
         run: |
-          docker buildx imagetools inspect ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
+          docker buildx imagetools inspect ghcr.io/${{ github.repository }}:${{ steps.meta.outputs.version }}
