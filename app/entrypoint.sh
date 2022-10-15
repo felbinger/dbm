@@ -15,7 +15,7 @@ if [ "${DATE_FORMAT}" == "long" ]; then
   DATE=$(date +"%Y-%m-%d_")
 fi
 # time in format HH-MM round to 15 minutes blocks
-DATE+=$(date +"%H")-$(echo "$(date +%M) - ($(date +%M)%15)" | bc)
+DATE=${DATE}$(date +"%H")-$(echo "$(date +%M) - ($(date +%M)%15)" | bc)
 
 if [ -n "${LDAP_HOST}" ]; then
   mkdir -p "/data/${DATE}"
