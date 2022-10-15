@@ -5,8 +5,6 @@ The Docker Backup Manager (DBM) is a docker image to back up the database and ld
 ## Packages
 * mariadb-client (`mysql` and `mysqldump`)
 * postgresql-client (`psql` and `pg_dump`)
-* mongodb (`mongo`)
-* mongodb-tools (`mongodump`)
 * openldap-clients (`ldapsearch`)
 
 ## Usage
@@ -44,10 +42,3 @@ If you'd like to execute the backup using a cronjob, you need to to remove the p
 | POSTGRES_USERNAME      | Username of the backup user.                     | backup        |
 | POSTGRES_PASSWORD      | Password of the backup user.                     |               |
 | POSTGRES_DATABASES     | Databases that should be included in the backup. |               |
-| MONGODB_HOST           | Container name of the mongodb container.         |               |
-| MONGODB_PORT           | Port of the mongodb server.                      | 27017         |
-| MONGODB_USERNAME       | Username of the backup user.                     | backup        |
-| MONGODB_PASSWORD       | Password of the backup user.                     |               |
-| MONGODB_DATABASES      | Databases that should be included in the backup. |               |
-| MONGODB_AUTH_DB        | Authentication Database                          | admin         |
-| MONGODB_AUTH_MECHANISM | Authentication Mechanism                         | SCRAM-SHA-1   |

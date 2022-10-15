@@ -14,7 +14,7 @@ ENV LDAP_PORT=389 \
     DATE_FORMAT=long
 
 RUN apk add --update --no-cache tzdata openldap-clients \
-  mariadb-client postgresql-client mongodb mongodb-tools
+  mariadb-client postgresql-client
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

@@ -124,39 +124,39 @@ if [ -n "${POSTGRES_HOST}" ] && [ -n "${POSTGRES_PORT}" ]; then
   fi
 fi
 
-if [ -n "${MONGODB_HOST}" ] && [ -n "${MONGODB_PORT}" ]; then
-  echo "Starting MongoDB (${MONGODB_HOST}) Backup"
-  mkdir -p "/data/${DATE}/${MONGODB_HOST}/"
-
-  # check if the required arguments are provided
-  if [ -n "${MONGODB_PASSWORD}" ] && [ -n "${MONGODB_DATABASES}" ]; then
-    for database_name in ${MONGODB_DATABASES}; do
-      # check if database exist
-      check=$(mongo --quiet \
-        --host="${MONGODB_HOST}" \
-        --port="${MONGODB_PORT}" \
-        --username="${MONGODB_USERNAME}" \
-        --password="${MONGODB_PASSWORD}" \
-        --eval "db.getMongo().getDBNames().indexOf(\"${database_name}\")")
-      if [ "${check}" -lt 0 ]; then
-        printf "\e[33mWarning: MongoDB database %s does not exist!\e[0m\n" "${database_name}"
-      else
-        mongodump --quiet \
-          --host="${MONGODB_HOST}" \
-          --port="${MONGODB_PORT}" \
-          --username="${MONGODB_USERNAME}" \
-          --password="${MONGODB_PASSWORD}" \
-          --authenticationDatabase="${MONGODB_AUTH_DB}" \
-          --authenticationMechanism="${MONGODB_AUTH_MECHANISM}" \
-          --db="${database_name}" --out "/data/${DATE}/${MONGODB_HOST}/"
-      fi
-    done
-  else
-    if [ -z "${MONGODB_PASSWORD}" ]; then
-      echo "Missing environment variables: MONGODB_PASSWORD"
-    fi
-    if [ -z "${MONGODB_DATABASES}" ]; then
-      echo "Missing environment variables: MONGODB_DATABASES"
-    fi
-  fi
-fi
+### if [ -n "${MONGODB_HOST}" ] && [ -n "${MONGODB_PORT}" ]; then
+###   echo "Starting MongoDB (${MONGODB_HOST}) Backup"
+###   mkdir -p "/data/${DATE}/${MONGODB_HOST}/"
+### 
+###   # check if the required arguments are provided
+###   if [ -n "${MONGODB_PASSWORD}" ] && [ -n "${MONGODB_DATABASES}" ]; then
+###     for database_name in ${MONGODB_DATABASES}; do
+###       # check if database exist
+###       check=$(mongo --quiet \
+###         --host="${MONGODB_HOST}" \
+###         --port="${MONGODB_PORT}" \
+###         --username="${MONGODB_USERNAME}" \
+###         --password="${MONGODB_PASSWORD}" \
+###         --eval "db.getMongo().getDBNames().indexOf(\"${database_name}\")")
+###       if [ "${check}" -lt 0 ]; then
+###         printf "\e[33mWarning: MongoDB database %s does not exist!\e[0m\n" "${database_name}"
+###       else
+###         mongodump --quiet \
+###           --host="${MONGODB_HOST}" \
+###           --port="${MONGODB_PORT}" \
+###           --username="${MONGODB_USERNAME}" \
+###           --password="${MONGODB_PASSWORD}" \
+###           --authenticationDatabase="${MONGODB_AUTH_DB}" \
+###           --authenticationMechanism="${MONGODB_AUTH_MECHANISM}" \
+###           --db="${database_name}" --out "/data/${DATE}/${MONGODB_HOST}/"
+###       fi
+###     done
+###   else
+###     if [ -z "${MONGODB_PASSWORD}" ]; then
+###       echo "Missing environment variables: MONGODB_PASSWORD"
+###     fi
+###     if [ -z "${MONGODB_DATABASES}" ]; then
+###       echo "Missing environment variables: MONGODB_DATABASES"
+###     fi
+###   fi
+### fi
